@@ -1,0 +1,30 @@
+# Исходники TypeScript
+*.ts
+!*.d.ts
+/src
+
+# Конфигурационные файлы
+tsconfig.json
+tslint.json
+*.tsbuildinfo
+
+# Тесты
+__tests__/
+*.test.ts
+*.spec.ts
+
+# Локальные настройки
+.node_modules/
+.nyc_output/
+*.log
+*.tgz
+
+
+# Редакторы
+*.idea/
+.vscode/
+
+# Другие файлы
+README.md
+.yarn-integrity
+.yarn-metadata.json
