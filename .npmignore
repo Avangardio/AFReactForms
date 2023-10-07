@@ -8,6 +8,10 @@ tsconfig.json
 tslint.json
 *.tsbuildinfo
 
+README.en.md
+README.ru.md
+
+
 # Тесты
 __tests__/
 *.test.ts

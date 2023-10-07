@@ -3,7 +3,7 @@
 A library for simplified form management in React, built upon concepts of easy handling.
 <b>Works with React(18.0.0+) and Next.js(12, 13.0+)</b>
 
-[English](./README.en.md) | [Русский](./README.ru.md)
+[English](https://github.com/Avangardio/AFReactForms/blob/main/README.en.md) | [Русский](https://github.com/Avangardio/AFReactForms/blob/main/README.ru.md)
 
 ## Motivation and Purpose of the Library
 While working on yet another form development, using Formik or React-Hook-Forms,

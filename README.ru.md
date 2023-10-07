@@ -3,7 +3,7 @@
 Библиотека для упрощенного управления формами в React, основанная на концепциях упрощения управления.
 <b>Работает с React(18.0.0+) и  Next.js(12, 13.0+)</b>
 
-[English](./README.en.md) | [Русский](./README.ru.md)
+[English](https://github.com/Avangardio/AFReactForms/blob/main/README.en.md) | [Русский](https://github.com/Avangardio/AFReactForms/blob/main/README.ru.md)
 
 ## Причины создания и смысл библиотеки
 Работая над очередной разработки формы, пользуя Formik или React-Hook-Forms,
