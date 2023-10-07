@@ -256,6 +256,29 @@ function Компонент(){
 ```jsx
 const { values, errors, service } = useForm({ initialValues, validationSchema });
 ```
+<table>Возвращает:
+<tbody>
+<th>Название</th><th>Описание</th>
+<tr>
+<td><b>values</b><td>объект с инпутами {[имя]: строка инпута}
+</tr>
+<tr>
+<td><b>errors</b><td>объект с ошибками {[имя]: строка ошибки}
+</tr>
+<tr>
+<td><b>serverError</b><td>строка с ошибкой от сервера, см. [Перейти к разделу ошибок]
+</tr>
+<tr>
+<td><b>touches</b><td>объект с индикатором фокуса на инпуте {[имя]: булево значение}
+</tr>
+<tr>
+<td><b>setServerError</b><td>функция обновления стейта серверной ошибки
+</tr>
+<tr>
+<td><b>service</b><td>объект для работы формы библиотеки. НЕ ИСПОЛЬЗОВАТЬ ВНЕ <Form>
+</tr>
+</tbody>
+</table>
 
 ## Лицензия
 MIT

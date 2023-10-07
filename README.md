@@ -1,81 +1,80 @@
 # afreactforms
 
-Библиотека для упрощенного управления формами в React, основанная на концепциях упрощения управления.
-<b>Работает с React(18.0.0+) и  Next.js(12, 13.0+)</b>
+A library for simplified form management in React, built upon concepts of easy handling.
+<b>Works with React(18.0.0+) and Next.js(12, 13.0+)</b>
 
 [English](https://github.com/Avangardio/AFReactForms/blob/main/README.en.md) | [Русский](https://github.com/Avangardio/AFReactForms/blob/main/README.ru.md)
 
-## Причины создания и смысл библиотеки
-Работая над очередной разработки формы, пользуя Formik или React-Hook-Forms,
-я так и не нашел удобного инструмента, который, к тому же, будет элегантен и прост в использовании.
+## Motivation and Purpose of the Library
+While working on yet another form development, using Formik or React-Hook-Forms,
+I couldn't find a convenient tool that was also elegant and simple to use.
 
-Для этого и был создан **afreacforms**, который стремится к решению данных проблем.
-<p>Для валидации использует **yup**.</p>
+This led to the creation of afreactforms, which aims to address these issues.
 
-## Установка
-Обычная установка библиотеки через npm
+<p>For validation, it uses **yup**.</p>
+
+## Installation
+Regular library installation via npm:
 ```bash
 npm install afreactforms
 ```
-Импорт выглядит так:
+Import is as follows:
 ```javascript
 import {useForm, Form, Field, FieldError} from "afreactforms";
 ```
 
-## Использование
-Настройка и использование крайне просты.
-Допустим, у нас есть форма с имейлом и паролем.
+## Usage
+Setting up and using is extremely simple.
+Let's say we have a form with email and password.
 
-Нам нужно использовать хук useForm, который принимает объект следующего вида:
+We need to use the useForm hook, which takes an object as follows:
 ```typescript jsx
 { 
     initialValues: {
-        [имяИнпута]: строка либо пустая "", либо "какой-то текст"
+        [inputName]: either an empty string "", or "some text"
     }
-    validationSchema: схема валидации из yup
+    validationSchema: yup validation schema
 }
 ```
-Получаем следующий вид:
+This gives:
 ````typescript jsx
 const SignupSchema = Yup.object().shape({Здесь объект инструкций валидации});
 
 const {values, errors, serverError, touches, setServerError, service} = 
     useForm({initialValues: {email: '', password: ''}, validationSchema: SignupSchema});
 ````
-
-
-<table>На выходе получим Данные:
+<table>Outputs are:
 <tbody>
-<th>Название</th><th>Описание</th>
+<th>Name</th><th>Description</th>
 <tr>
-<td><b>values</b><td>объект с инпутами {[имя]: строка инпута}
+<td><b>values</b><td>Object with inputs {[name]: input string}
 </tr>
 <tr>
-<td><b>errors</b><td>объект с ошибками {[имя]: строка ошибки}
+<td><b>errors</b><td>Object with errors {[name]: error string}
 </tr>
 <tr>
-<td><b>serverError</b><td>строка с ошибкой от сервера, см. [Перейти к разделу ошибок]
+<td><b>serverError</b><td>String with server error, see [Go to the errors section]
 </tr>
 <tr>
-<td><b>touches</b><td>объект с индикатором фокуса на инпуте {[имя]: булево значение}
+<td><b>touches</b><td>Object with input focus indicator {[name]: boolean value}
 </tr>
 <tr>
-<td><b>setServerError</b><td>функция обновления стейта серверной ошибки
+<td><b>setServerError</b><td>Function to update the server error state
 </tr>
 <tr>
-<td><b>service</b><td>объект для работы формы библиотеки. НЕ ИСПОЛЬЗОВАТЬ ВНЕ <Form>
+<td><b>service</b><td>Object for library form functionality. DO NOT USE OUTSIDE < Form /></td>
 </tr>
 </tbody>
 </table>
 
-### Использование формы
-Далее, нужно получить форму следующего вида
+### Using the Form
+Next, you need a form as follows:
 
 ```typescript jsx
 import {useForm, Form, Field, FieldError} from "afreactforms";
 
-function Компонент(){
-    //используем хук useForm
+function Component(){
+    //use the useForm hook
     const {values, errors, serverError, touches, setServerError, service} = useForm({
         initialValues: {
             email: '',
@@ -84,181 +83,199 @@ function Компонент(){
         }, validationSchema: SignupSchema
     });
 
-    //отрисовываем элемент
+    //render the element
     return (
         <Form
-            //Можно передать класс
+            //You can provide a class
             className={'flex flex-col gap-1'}
-            //Нужно передать функцию сабмита
+            //You must provide a submit function
             onSubmit={() => {
-                fetch('Запрос на сервер с формой').then(
+                fetch('Server request with form').then(
                     result => ...,
-                    error  => setServerError("Какая-то ошибка!")
-                )
+                error  => setServerError("Some error!")
+            )
             }}
-            //ОБЯЗАТЕЛЬНО ПЕРЕДАВАТЬ ЭТОТ ПРОП
+            //MUST PASS THIS PROP
             serviceProp={service}
         >
-            //Наполняется любыми нодами
-            <p>Регистрация</p>
-            //!Для полей инпута из библиотеки нужно передать name - из initialValues
-            <Field 
-                   //Обязательно - name из initialValues
-                   name={'email'} 
-                   //Обязательно - Тип инпута
-                   type={'email'} 
-                   //Необязательно - классы
-                   className={'bg-red'} 
-                   //Необязательно - плейсхолдер
-                   placeholder={'Имейл'}
+            //Fill with any nodes
+            <p>Registration</p>
+            //!For library input fields, you need to provide the name - from initialValues
+            <Field
+                //Mandatory - name from initialValues
+                name={'email'}
+                //Mandatory - input type
+                type={'email'}
+                //Optional - classes
+                className={'bg-red'}
+                //Optional - placeholder
+                placeholder={'Enter email'}
             />
-            //Необязательный компонент для вывода ошибок валидации
-            //Передать name - из initialValues
+            //Optional component for displaying validation errors
+            //Provide name - from initialValues
             <FieldError name={'email'}>
-                //Можно использовать таким видом, с функцией (errorMsg: string) => ReactNode;
+                //You can use like this, with a function (errorMsg: string) => ReactNode;
                 {errorMsg => {
                     return <a>{errorMsg}</a>
                 }}
             </FieldError>
 
             <Field name={'password'} type={'password'}/>
-            //Либо просто передать элемент один, который имеет пропс errorMsg внутри
+            //Or simply provide an element that has an errorMsg prop inside
             <FieldError name={'password'}>
                 //function MyErrorComponent({className, errorMsg}) {...}
                 <MyErrorComponent />
             </FieldError>
-            
-            //Так же, можно получить ошибку от сервера*, передав name - serverError
-            //Без передачи компонента вернет <p>Сообщение</p>
-            <FieldError name={'serverError'} 
-                        //можно определить классы
+
+            //Similarly, you can get server error*, by passing name - serverError
+            //Without providing a component, it will return <p>Message</p>
+            <FieldError name={'serverError'}
+                //you can specify classes
                         className={'blue'}
             />
-            //И обычная кнопка, которая отправит форму
-            <button type={"submit"}>Отправить</button>
+            //Regular button to submit the form
+            <button type={"submit"}>Submit</button>
         </Form>
     )
 }
 ```
-Всё, теперь у нас будет форма, которая будет изменяться, отображать ошибки, валидацию и автоматическую работу.
+That's it, now you have a form that will change, display errors, validation, and has automated functionality.
 
-
-# Основные компоненты
+# Main Components
 ## Form
-Обертывающий компонент для вашей формы, который предоставляет контекст для дочерних компонентов.
+A wrapper component for your form, providing context for its children.
 
-<table> Пропсы компонента:
+<table> Component Props:
 <tbody>
-<th>Название</th><th>Обязательность</th><th>Описание</th>
+<th>Name</th><th>Mandatory</th><th>Description</th>
 <tr>
-<td><b>children</b> <td>(обязательно) <td>Дочерние элементы формы.
+<td><b>children</b> <td>Yes <td>Form's child elements.
 </tr>
-
 <tr>
-<td><b>onSubmit</b><td> (обязательно) <td>Обработчик отправки формы.
+<td><b>onSubmit</b><td> Yes <td>Form submit handler.
 </tr>
-
 <tr>
-<td><b>className</b> <td>(необязательно) <td>Имя класса для стилизации.
+<td><b>className</b> <td>No <td>Class name for styling.
 </tr>
-
 <tr>
-<td><b>serviceProp</b><td>(обязательно)<td> Свойства сервиса формы.
+<td><b>serviceProp</b><td>Yes<td> Form's service properties.
 </tr>
 </tbody>
 </table>
 
-Использование:
+Usage:
 ```typescript jsx
 <Form onSubmit={handleOnSubmit} serviceProp={service}>
-    // дочерние элементы
+    // child elements
 </Form>
 
 ```
 ## Field
-Компонент поля ввода, который автоматически синхронизируется с контекстом формы.
+Input field component that automatically synchronizes with the form context.
 
-<table> Пропсы компонента:
+<table> Component Props:
 <tbody>
-<th>Название</th><th>Обязательность</th><th>Описание</th>
+<th>Name</th><th>Mandatory</th><th>Description</th>
 <tr>
-<td><b>name</b> <td>(обязательно) <td>Имя поля.
+<td><b>name</b> <td>Yes <td>Field's name.
 </tr>
-
 <tr>
-<td><b>type</b><td> (необязательно) <td>Тип поля ввода, например "text", "email" и так далее.
+<td><b>type</b><td> No <td>Input field type, e.g., "text", "email", etc.
 </tr>
-
 <tr>
-<td><b>placeholder</b> <td>(необязательно) <td>Подсказка для поля ввода.
+<td><b>placeholder</b> <td>No <td>Input field placeholder.
 </tr>
-
 <tr>
-<td><b>className</b><td>(необязательно)<td> Имя класса для стилизации.
+<td><b>className</b><td>No<td> Class name for styling.
 </tr>
 </tbody>
-</table>
 
-Использование:
+</table>
+Usage:
+
 ```jsx
-<Field name="email" type="email" placeholder="Введите ваш email" />
+<Field name="email" type="email" placeholder="Insert your email" />
 ```
 # FieldError
-Компонент для отображения ошибок поля.
+Component to display field errors.
 
-<table> Пропсы компонента:
+<table> Component Props:
 <tbody>
-<th>Название</th><th>Обязательность</th><th>Описание</th>
+<th>Name</th><th>Mandatory</th><th>Description</th>
 <tr>
-<td><b>name</b> <td>(обязательно) <td>Имя поля, для которого необходимо отобразить ошибку.
-<p>"serverError" - для серверных ошибок. получает serverError, устанавливается setServerError("")
+<td><b>name</b> <td>Yes <td>Name of the field to display error for.
+<p>"serverError" - for server errors. gets serverError, set by setServerError("")
 </tr>
 <tr>
-<td><b>children</b><td> (необязательно) <td>Кастомный компонент для отображения ошибки или функция для рендеринга ошибки.
+<td><b>children</b><td> No <td>Custom component to display error or a function to render the error.
 </tr>
 <tr>
-<td><b>className</b> <td>(необязательно) <td>Имя класса для стилизации.
+<td><b>className</b> <td>No <td>Class name for styling.
 </tr>
 </tbody>
 </table>
 
-Использование:
+Usage:
 ```jsx
 //Без ноды
+//Without a node
 <FieldError name="email" />
-//С функцией
+//With a function
 <FieldError name="email">
     {(errorMsg) => <span style={{color: 'red'}}>{errorMsg}</span>}
 </FieldError>
-//С компонентом
+//With a component
 //function MyErrorComponent({className, errorMsg}) {...}
 <FieldError name="email">
     <CustomErrorComponent />
 </FieldError>
 ```
 
-# хук useForm
-Хук для управления логикой формы.
+# useForm Hook
+A hook to manage the form logic.
 
-<table>Параметры:
+<table> Hook Properties:
 <tbody>
-<th>Название</th><th>Обязательность</th><th>Описание</th>
+<th>Name</th><th>Mandatory</th><th>Description</th>
 <tr>
-<td><b>initialValues</b> <td>(обязательно) <td>Начальные значения для полей формы.
+<td><b>initialValues</b> <td>Yes <td>Initial values for the form fields.
 </tr>
 <tr>
-<td><b>validationSchema</b><td> (обязательно) <td>Схема валидации для полей с помощью yup.
+<td><b>validationSchema</b><td> Yes <td>Validation schema for the fields using yup.
 </tr>
 </tbody>
 </table>
 
-Использование:
+Usage:
 ```jsx
 const { values, errors, service } = useForm({ initialValues, validationSchema });
 ```
+<table>Return:
+<tbody>
+<th>Name</th><th>Description</th>
+<tr>
+<td><b>values</b><td>Object with inputs {[name]: input string}
+</tr>
+<tr>
+<td><b>errors</b><td>Object with errors {[name]: error string}
+</tr>
+<tr>
+<td><b>serverError</b><td>String with server error, see [Go to the errors section]
+</tr>
+<tr>
+<td><b>touches</b><td>Object with input focus indicator {[name]: boolean value}
+</tr>
+<tr>
+<td><b>setServerError</b><td>Function to update the server error state
+</tr>
+<tr>
+<td><b>service</b><td>Object for library form functionality. DO NOT USE OUTSIDE < Form /></td>
+</tr>
+</tbody>
+</table>
 
-## Лицензия
+## License
 MIT
 
-## Контакты
-При проблемах или предложениях - используйте [GitHub](https://github.com/Avangardio/AFReactForms)
+## Contacts
+For issues or suggestions, use [GitHub](https://github.com/Avangardio/AFReactForms)

@@ -250,6 +250,29 @@ Usage:
 ```jsx
 const { values, errors, service } = useForm({ initialValues, validationSchema });
 ```
+<table>Return:
+<tbody>
+<th>Name</th><th>Description</th>
+<tr>
+<td><b>values</b><td>Object with inputs {[name]: input string}
+</tr>
+<tr>
+<td><b>errors</b><td>Object with errors {[name]: error string}
+</tr>
+<tr>
+<td><b>serverError</b><td>String with server error, see [Go to the errors section]
+</tr>
+<tr>
+<td><b>touches</b><td>Object with input focus indicator {[name]: boolean value}
+</tr>
+<tr>
+<td><b>setServerError</b><td>Function to update the server error state
+</tr>
+<tr>
+<td><b>service</b><td>Object for library form functionality. DO NOT USE OUTSIDE < Form /></td>
+</tr>
+</tbody>
+</table>
 
 ## License
 MIT
