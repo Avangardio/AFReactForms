@@ -38,7 +38,7 @@ We need to use the useForm hook, which takes an object as follows:
 ```
 This gives:
 ````typescript jsx
-const SignupSchema = Yup.object().shape({Здесь объект инструкций валидации});
+const SignupSchema = Yup.object().shape({your validation});
 
 const {values, errors, serverError, touches, setServerError, service} = 
     useForm({initialValues: {email: '', password: ''}, validationSchema: SignupSchema});

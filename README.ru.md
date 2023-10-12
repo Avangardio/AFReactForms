@@ -276,7 +276,7 @@ const { values, errors, service } = useForm({ initialValues, validationSchema })
 <td><b>setServerError</b><td>функция обновления стейта серверной ошибки
 </tr>
 <tr>
-<td><b>service</b><td>объект для работы формы библиотеки. НЕ ИСПОЛЬЗОВАТЬ ВНЕ <Form>
+<td><b>service</b><td>объект для работы формы библиотеки. НЕ ИСПОЛЬЗОВАТЬ ВНЕ < Form >
 </tr>
 </tbody>
 </table>
